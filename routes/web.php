@@ -25,10 +25,5 @@ Route::get('/videos/preview/{id}', 'VideoController@preview')->name('videos.prev
 Route::get('/listar/', 'VideoController@list')->name('videos.list');
 Route::get('/carregar/video/{id}', 'VideoController@carregarAjax')->name('videos.ajax');
 
-//edit product
-Route::get('/video/play/{id}', function ($id) {
-    return view('videos.video', [
-        //'data' => App\products::where('id', $id)->get()
-        'data' => 'hOUvrWx5uVY'
-    ]);
-});
+//Rotas VueJs
+Route::get('usuarios', 'UserController@index')->name('users.index');
