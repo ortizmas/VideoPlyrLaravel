@@ -71,7 +71,7 @@ class VideoController extends Controller
             'key' => $keyVideo,
             'status' => 200
         );
-         return response()->json($data);
+        return response()->json($data);
     }
 
     /**

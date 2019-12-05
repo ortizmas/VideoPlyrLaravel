@@ -21,6 +21,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/videos', 'VideoController');
 Route::get('/videos/preview/{id}', 'VideoController@preview')->name('videos.preview');
-Route::get('/listar/', 'VideoController@list')->name('videos.list');
-Route::get('/carrega/comentarios/artigo/{id}', 'VideoController@carregarAjax')->name('videos.ajax');
 
+Route::get('/listar/', 'VideoController@list')->name('videos.list');
+Route::get('/carregar/video/{id}', 'VideoController@carregarAjax')->name('videos.ajax');
+
+//edit product
+Route::get('/video/play/{id}', function ($id) {
+    return view('videos.video', [
+        //'data' => App\products::where('id', $id)->get()
+        'data' => 'hOUvrWx5uVY'
+    ]);
+});
