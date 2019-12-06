@@ -26,5 +26,6 @@ Route::get('/listar/', 'VideoController@list')->name('videos.list');
 Route::get('/carregar/video/{id}', 'VideoController@carregarAjax')->name('videos.ajax');
 
 //Rotas VueJs
-Route::get('usuarios', 'UserController@index')->name('users.index');
-Route::get('users', 'UserController@list')->name('users.list');
+Route::get('/usuarios', 'UserController@index')->name('users.index');
+Route::get('/users', 'UserController@list')->name('users.list');
+Route::get('/users/{id}', 'UserController@show')->name('users.show');
