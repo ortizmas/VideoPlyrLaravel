@@ -12,4 +12,10 @@ class UserController extends Controller
         $users = User::all();
         return view('users.index')->with(compact('users'));
     }
+
+    public function list()
+    {
+        $users = User::all();
+        return response()->json($users);
+    }
 }

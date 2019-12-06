@@ -21,14 +21,14 @@
                         </div>
                     @endif
 
-                    <div class="plyr__video-embed" id="player">
+                    {{-- <div class="plyr__video-embed" id="player">
                         <iframe
                         src="https://www.youtube.com/embed/TGSJjDahlrQ?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1"
                         allowfullscreen
                         allowtransparency
                         allow="autoplay"
                         ></iframe>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -54,9 +54,10 @@
                             </div>
                             <div id="collapse-1" class="collapse {{ (isset($show)) ? 'show' : '' }}" data-parent="#accordion" aria-labelledby="heading-1">
                                 <ul class="list-group">
-                                   @foreach ($users as $user)
+                                   {{-- @foreach ($users as $user)
                                         <li class="list-group-item rounded-0"><a href="{{ route('users.index') }}" title="">{{ $user->name }}</a></li>
-                                    @endforeach
+                                    @endforeach --}}
+                                   <li v-for="user in users" class="list-group-item rounded-0">@{{ user.name }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -84,6 +85,8 @@
                     </div>
                 </div>
             </div>
+
+            @{{$data}}
         </div>
     </div>
 </div>
