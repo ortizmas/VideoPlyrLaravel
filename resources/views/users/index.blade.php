@@ -8,7 +8,7 @@
 @endsection
 
 @section('content')
-    <app></app>
+    <app-component></app-component>
 @endsection
 
 @section('scripts')

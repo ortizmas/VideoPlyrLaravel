@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <posts></posts>
+	<app-component></app-component>
+    {{-- <posts></posts> --}}
 @endsection

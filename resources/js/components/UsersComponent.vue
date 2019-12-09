@@ -29,12 +29,12 @@
         methods: {
             infiniteHandler($state) {
                 this.page++
-                let url = '/users?page='+this.page
+                let url = '/api/users?page='+this.page
                 axios.get(url)
                 .then(response => {
-                    let posts = response.data.data
-                    if(posts.length){
-                        this.list = this.list.concat(posts)
+                    let users = response.data.data
+                    if(users.length){
+                        this.list = this.list.concat(users)
                         $state.loaded()
                     }else{
                         $state.complete()

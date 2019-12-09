@@ -29,21 +29,13 @@
                     </button>
                 </div>
             </div>
-        </header>
+
+        </header><!-- /header -->
 
         <transition name="slide-fade" mode="out-in">
             <router-view :key="$route.fullPath"></router-view>
         </transition>
 
-        
-        <users></users>
-
-     </div>
+    </div>
 </template>
-<script>
-    export default {
-        mounted() {
-            console.log('Component mounted.')
-        }
-    }
-</script>
+

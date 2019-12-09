@@ -8,6 +8,7 @@ require("./bootstrap");
 
 window.Vue = require("vue");
 
+
 // import VueRouter from "vue-router";
 
 // Vue.use(VueRouter);
@@ -16,6 +17,7 @@ window.Vue = require("vue");
 //   { path: "/foo", component: Foo },
 //   { path: "/bar", component: Bar }
 // ];
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -30,25 +32,26 @@ window.Vue = require("vue");
 
 //https://www.youtube.com/watch?v=8M4HF1U_DH0&list=PLhCiuvlix-rSGTvItDLXyGwyjoNz-CnMJ&index=13
 
-Vue.component('app', require('./components/AppComponent.vue').default);
+Vue.component('app-component', require('./components/AppComponent.vue').default);
 Vue.component('posts', require('./components/PostsComponent.vue').default);
 
 Vue.component('users', require('./components/UsersComponent.vue').default);
 Vue.component('infinite',   require('vue-infinite-loading'));
+
+Vue.component('videos-component', require('./components/VideoComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
-import router from './routes.js'
+import router  from './routes.js'
 
 const app = new Vue({
   	el: "#app",
 	router,
 	  
-  	/*created: function() {
+  	created: function() {
     	this.getUsers();
   	},
   	data: {
@@ -61,5 +64,5 @@ const app = new Vue({
         		this.users = response.data;
       		});
     	}
-  	}*/
+  	}
 });

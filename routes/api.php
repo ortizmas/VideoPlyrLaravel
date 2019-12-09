@@ -13,6 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::get('posts', 'PostController@index')->name('posts.index');
+Route::get('post/{slug}', 'PostController@show')->name('posts.show');
+
+Route::get('/users', 'UserController@list')->name('users.list');
+Route::get('/users/{id}', 'UserController@show')->name('users.show');
+
+Route::get('videos', 'VideoController@getVideos')->name('videos.lists');
+Route::get('/video/{id}', 'VideoController@show')->name('videos.show');

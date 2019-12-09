@@ -80,11 +80,15 @@ class VideoController extends Controller
         //
     }
 
-    public function show(Video $video)
+    public function getVideos()
     {
-        //
+        return Video::getVideos();
     }
 
+    public function show($id)
+    {
+        return Video::getById($id);
+    }
 
     public function edit(Video $video)
     {

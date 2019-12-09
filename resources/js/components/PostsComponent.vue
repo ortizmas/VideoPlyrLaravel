@@ -4,11 +4,12 @@
 	        <div class="col-md-12">
 
 	            <div class="card mb-3 mt-3" v-for="item in list">
-	            	<a class="card-header" v-bind:href="item.slug" v-text="item.title"></a>
+	            	<!-- <a class="card-header" v-bind:href="item.slug" v-text="item.title"></a> -->
+					<router-link class="card-header" :to="{name: 'post', params: {slug: item.slug}}" v-text="item.title"></router-link>
 	                
 	                <div class="card-body">
 	                	<p>ID: {{ item.id }}</p>
-	                    <p class="card-text" v-text="item.content"></p>
+	                    <p class="card-text" v-html="item.content"></p>
 	                </div>
 	            </div>
 
@@ -35,7 +36,7 @@
 		methods: {
 			infiniteHandler($state) {
 				this.page++
-				let url = '/posts?page='+this.page
+				let url = '/api/posts?page='+this.page
 
 				axios.get(url).then(response => {
 					let posts = response.data.data
