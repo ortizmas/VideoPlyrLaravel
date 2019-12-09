@@ -15,9 +15,11 @@ class UserController extends Controller
 
     public function list()
     {
-        $users = User::all();
+        //$users = User::all();
 
-        return response()->json($users);
+        //return response()->json($users);
+        
+        return User::orderBy('id', 'DESC')->paginate();
     }
 
     public function show($id)

@@ -6,7 +6,7 @@ Vue.use(Router)
 export default new Router({
 	routes: [
         {
-            path: '/',
+            path: '/usuarios',
             name: 'home',
             component: require('./views/Home')
         },
@@ -17,14 +17,17 @@ export default new Router({
         },
         {
             path: ':slug',
-            name: 'user',
+            name: 'users',
             component: require('./views/User'),
             props: true
         },
         {
             path: '*',
             component: require('./views/404')
-        }
+        }   
     ],
-    mode: 'history' //Evita que aparesca # nas rutas #/home, #/user, etc
+    mode: 'history', //Evita que aparesca # nas rutas #/home, #/user, etc
+    scrollBehavior() {
+		return {x:0, y:0}
+	}
 })

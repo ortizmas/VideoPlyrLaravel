@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('vue');
 });
 
 Auth::routes();
@@ -29,3 +29,6 @@ Route::get('/carregar/video/{id}', 'VideoController@carregarAjax')->name('videos
 Route::get('/usuarios', 'UserController@index')->name('users.index');
 Route::get('/users', 'UserController@list')->name('users.list');
 Route::get('/users/{id}', 'UserController@show')->name('users.show');
+
+Route::get('posts', 		'PostController@index');
+Route::get('post/{slug}', 	'PostController@show');

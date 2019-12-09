@@ -30,8 +30,11 @@ window.Vue = require("vue");
 
 //https://www.youtube.com/watch?v=8M4HF1U_DH0&list=PLhCiuvlix-rSGTvItDLXyGwyjoNz-CnMJ&index=13
 
-Vue.component("app", require("./components/AppComponent.vue").default);
-Vue.component("example-component",require("./components/ExampleComponent.vue").default);
+Vue.component('app', require('./components/AppComponent.vue').default);
+Vue.component('posts', require('./components/PostsComponent.vue').default);
+
+Vue.component('users', require('./components/UsersComponent.vue').default);
+Vue.component('infinite',   require('vue-infinite-loading'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -43,8 +46,9 @@ import router from './routes.js'
 
 const app = new Vue({
   	el: "#app",
-  	router,
-  	created: function() {
+	router,
+	  
+  	/*created: function() {
     	this.getUsers();
   	},
   	data: {
@@ -57,5 +61,5 @@ const app = new Vue({
         		this.users = response.data;
       		});
     	}
-  	}
+  	}*/
 });
