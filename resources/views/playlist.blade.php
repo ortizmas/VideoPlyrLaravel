@@ -10,12 +10,14 @@
     {{-- <posts></posts> --}}
 @endsection
 
-{{-- @section('scripts')
-	<script src="https://cdn.plyr.io/3.5.6/plyr.js"></script>
+@section('scripts')
+	{{-- <script src="https://cdn.plyr.io/3.5.6/plyr.js"></script>
 
     <script>
         const player = new Plyr('#player', {
             title: 'Example Title',
         });
-    </script>
-@endsection --}}
+    </script> --}}
+    {{-- <script type="text/javascript" src="https://unpkg.com/vue-plyr"></script>
+    <script type="text/javascript" src="https://unpkg.com/plyr"></script> --}}
+@endsection

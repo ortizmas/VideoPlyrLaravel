@@ -1,14 +1,24 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[3],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/videos/Video.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/videos/Video.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/videos/Plyr.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/videos/Plyr.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -28,28 +38,81 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['id', 'keyVideo'],
+  el: '#app2',
+  props: ['id'],
+  created: function created() {
+    this.getVideoById();
+  },
   data: function data() {
     return {
-      video: {}
+      duration: null,
+      player: null,
+      videoById: {},
+      idVideo: {} //videoUrl: "https://www.youtube.com/embed/jW4peJBTHcA?iv_load_policy=3&modestbranding=1&playsinline=1&showinfo=0&rel=0&enablejsapi=1"
+      //videoUrl: 'https://www.youtube.com/embed/jW4peJBTHcA?start=95&end=1380&version=3&playsinline=1'
+
     };
   },
-  created: function created() {
-    var _this = this;
+  computed: {
+    playerOptions: function playerOptions() {
+      var options = {
+        title: "This is an example video",
+        playsinline: false,
+        volume: 0,
+        controls: ['play', 'play-large'],
+        debug: false
+      };
+      return options;
+    },
+    mySrc: {
+      get: function get() {
+        //concat using template literal
+        return "https://www.youtube.com/embed/";
+      }
+    },
+    myId: {
+      get: function get() {
+        //concat using template literal JSON.stringify(this.json, null, '    ');
+        return this.idVideo;
+      }
+    }
+  },
+  //components: {},
+  mounted: function mounted() {
+    this.player = this.$refs.player.player;
+  },
+  methods: {
+    getVideoById: function getVideoById() {
+      var _this = this;
 
-    var url = '/api/video/' + this.id;
-    axios.get(url).then(function (response) {
-      _this.video = response.data, _this.keyVideo = 'https://www.youtube.com/embed/' + response.data.key + '?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1';
-    });
+      var url = '/api/video/' + this.id;
+      axios.get(url).then(function (response) {
+        _this.videoById = response.data, _this.idVideo = response.data.key;
+      });
+    },
+    videoTimeUpdated: function videoTimeUpdated(event) {
+      this.duration = this.player.currentTime; // this if statement doesn't seem to do anything
+
+      if (this.player.currentTime > 105) {
+        this.player.stop();
+      }
+    },
+    nowPlaying: function nowPlaying(event) {
+      console.log(event);
+    },
+    playerReady: function playerReady() {
+      this.player.currentTime = 95;
+      console.log('player ready');
+    }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/videos/Video.vue?vue&type=template&id=3f651563&":
-/*!**********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/videos/Video.vue?vue&type=template&id=3f651563& ***!
-  \**********************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/videos/Plyr.vue?vue&type=template&id=3d21705d&":
+/*!*********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/videos/Plyr.vue?vue&type=template&id=3d21705d& ***!
+  \*********************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -61,45 +124,61 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "plyr__video-embed", attrs: { id: "player" } }, [
-        _c("iframe", {
-          attrs: {
-            src:
-              "https://www.youtube.com/embed/TGSJjDahlrQ?origin=https://plyr.io&iv_load_policy=3&modestbranding=1&playsinline=1&showinfo=0&rel=0&enablejsapi=1",
-            allowfullscreen: "",
-            allowtransparency: "",
-            allow: "autoplay"
+  return _c(
+    "div",
+    { attrs: { id: "app2" } },
+    [
+      _c("div", [_vm._v("Duration: " + _vm._s(_vm.duration))]),
+      _vm._v(" "),
+      _c(
+        "vue-plyr",
+        {
+          ref: "player",
+          attrs: { emit: ["ready", "timeupdate", "playing"] },
+          on: {
+            timeupdate: _vm.videoTimeUpdated,
+            playing: _vm.nowPlaying,
+            ready: _vm.playerReady
           }
-        })
-      ])
-    ])
-  }
-]
+        },
+        [
+          _c("div", { staticClass: "plyr__poster" }, [
+            _c("iframe", {
+              attrs: {
+                id: "player",
+                src: _vm.mySrc + _vm.myId,
+                allowfullscreen: "",
+                allowtransparency: "",
+                allow: "autoplay"
+              }
+            })
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("h2", { class: _vm.idVideo }, [_vm._v("@" + _vm._s(_vm.myId))])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
 
 /***/ }),
 
-/***/ "./resources/js/views/videos/Video.vue":
-/*!*********************************************!*\
-  !*** ./resources/js/views/videos/Video.vue ***!
-  \*********************************************/
+/***/ "./resources/js/views/videos/Plyr.vue":
+/*!********************************************!*\
+  !*** ./resources/js/views/videos/Plyr.vue ***!
+  \********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Video_vue_vue_type_template_id_3f651563___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Video.vue?vue&type=template&id=3f651563& */ "./resources/js/views/videos/Video.vue?vue&type=template&id=3f651563&");
-/* harmony import */ var _Video_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Video.vue?vue&type=script&lang=js& */ "./resources/js/views/videos/Video.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Plyr_vue_vue_type_template_id_3d21705d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Plyr.vue?vue&type=template&id=3d21705d& */ "./resources/js/views/videos/Plyr.vue?vue&type=template&id=3d21705d&");
+/* harmony import */ var _Plyr_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Plyr.vue?vue&type=script&lang=js& */ "./resources/js/views/videos/Plyr.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -109,9 +188,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Video_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Video_vue_vue_type_template_id_3f651563___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Video_vue_vue_type_template_id_3f651563___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Plyr_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Plyr_vue_vue_type_template_id_3d21705d___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Plyr_vue_vue_type_template_id_3d21705d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -121,38 +200,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/views/videos/Video.vue"
+component.options.__file = "resources/js/views/videos/Plyr.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/views/videos/Video.vue?vue&type=script&lang=js&":
-/*!**********************************************************************!*\
-  !*** ./resources/js/views/videos/Video.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************/
+/***/ "./resources/js/views/videos/Plyr.vue?vue&type=script&lang=js&":
+/*!*********************************************************************!*\
+  !*** ./resources/js/views/videos/Plyr.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Video_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Video.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/videos/Video.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Video_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Plyr_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Plyr.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/videos/Plyr.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Plyr_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/views/videos/Video.vue?vue&type=template&id=3f651563&":
-/*!****************************************************************************!*\
-  !*** ./resources/js/views/videos/Video.vue?vue&type=template&id=3f651563& ***!
-  \****************************************************************************/
+/***/ "./resources/js/views/videos/Plyr.vue?vue&type=template&id=3d21705d&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/views/videos/Plyr.vue?vue&type=template&id=3d21705d& ***!
+  \***************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Video_vue_vue_type_template_id_3f651563___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Video.vue?vue&type=template&id=3f651563& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/videos/Video.vue?vue&type=template&id=3f651563&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Video_vue_vue_type_template_id_3f651563___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Plyr_vue_vue_type_template_id_3d21705d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Plyr.vue?vue&type=template&id=3d21705d& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/videos/Plyr.vue?vue&type=template&id=3d21705d&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Plyr_vue_vue_type_template_id_3d21705d___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Video_vue_vue_type_template_id_3f651563___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Plyr_vue_vue_type_template_id_3d21705d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

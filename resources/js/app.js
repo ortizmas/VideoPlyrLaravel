@@ -9,15 +9,6 @@ require("./bootstrap");
 window.Vue = require("vue");
 
 
-// import VueRouter from "vue-router";
-
-// Vue.use(VueRouter);
-
-// let routes = [
-//   { path: "/foo", component: Foo },
-//   { path: "/bar", component: Bar }
-// ];
-
 
 /**
  * The following block of code may be used to automatically register your
@@ -32,6 +23,13 @@ window.Vue = require("vue");
 
 //https://www.youtube.com/watch?v=8M4HF1U_DH0&list=PLhCiuvlix-rSGTvItDLXyGwyjoNz-CnMJ&index=13
 
+import router  from './routes.js'
+import plyr from './plyr.js'
+
+//import VuePlyr from "vue-plyr";
+// import "vue-plyr/dist/vue-plyr.css";
+//Vue.use(VuePlyr);
+
 Vue.component('app-component', require('./components/AppComponent.vue').default);
 Vue.component('posts', require('./components/PostsComponent.vue').default);
 
@@ -45,12 +43,13 @@ Vue.component('videos-component', require('./components/VideoComponent.vue').def
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-import router  from './routes.js'
+
+
 
 const app = new Vue({
   	el: "#app",
 	router,
-	  
+
   	created: function() {
     	this.getUsers();
   	},

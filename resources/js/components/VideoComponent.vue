@@ -1,6 +1,3 @@
-<style lang="css">
-    @import 'https://cdn.plyr.io/3.5.6/plyr.css';
-</style>
 <template>
     <div>
         <div class="container">
@@ -46,16 +43,6 @@
 </template>
 
 <script>
-    @import 'https://cdn.plyr.io/3.5.6/plyr.js';
-</script>
-
-<script>
-    const player = new Plyr('#player', {
-        title: 'Example Title',
-    });
-</script>
-
-<script>
     export default {
         created: function() {
             this.getVideo();
@@ -65,11 +52,11 @@
                 listVideo: []
             }
         },
-        mounted() {
-            let plyrVideo = document.createElement('script')
-            plyrVideo.setAttribute('src', 'https://cdn.plyr.io/3.5.6/plyr.js')
-            document.head.appendChild(plyrVideo)
-        },
+        // mounted() {
+        //     let plyrVideo = document.createElement('script')
+        //     plyrVideo.setAttribute('src', 'https://cdn.plyr.io/3.5.6/plyr.js')
+        //     document.head.appendChild(plyrVideo)
+        // },
         methods: {
             getVideo: function() {
                 var urlVideos = "/api/videos";

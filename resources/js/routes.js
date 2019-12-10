@@ -35,7 +35,7 @@ export default new VueRouter ({
         {
             path: '/video/:id',
             name: 'video',
-            component: () => import('./views/videos/Video'),
+            component: () => import('./views/videos/Plyr'),
             props: true
         },
         {
