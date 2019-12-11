@@ -24,4 +24,4 @@ Route::get('/users', 'UserController@list')->name('users.list');
 Route::get('/users/{id}', 'UserController@show')->name('users.show');
 
 Route::get('videos', 'VideoController@getVideos')->name('videos.lists');
-Route::get('/video/{id}', 'VideoController@show')->name('videos.show');
+Route::get('/video/{id}/{code}', 'VideoController@show')->name('videos.show');

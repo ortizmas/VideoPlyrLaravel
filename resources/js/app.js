@@ -38,6 +38,11 @@ Vue.component('infinite',   require('vue-infinite-loading'));
 
 Vue.component('videos-component', require('./components/VideoComponent.vue').default);
 
+//https://bluuweb.github.io/tutorial-laravel/vue/#componente-con-vue-js
+Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('pages', require('./components/PagesComponent.vue').default);
+
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

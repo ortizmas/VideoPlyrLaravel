@@ -27,83 +27,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+//import { GET_VIDEO } from "../utils/endpoint.js";
+var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  el: '#app2',
-  props: ['id'],
-  created: function created() {
-    this.getVideoById();
-  },
+  name: "Vimeo",
+  props: ['id', 'code'],
   data: function data() {
     return {
-      duration: null,
-      player: null,
-      videoById: {},
-      idVideo: {} //videoUrl: "https://www.youtube.com/embed/jW4peJBTHcA?iv_load_policy=3&modestbranding=1&playsinline=1&showinfo=0&rel=0&enablejsapi=1"
-      //videoUrl: 'https://www.youtube.com/embed/jW4peJBTHcA?start=95&end=1380&version=3&playsinline=1'
-
+      videoUrl: "",
+      videoTitle: "",
+      videoVimeoId: ""
     };
   },
   computed: {
-    playerOptions: function playerOptions() {
-      var options = {
-        title: "This is an example video",
-        playsinline: false,
-        volume: 0,
-        controls: ['play', 'play-large'],
-        debug: false
-      };
-      return options;
-    },
-    mySrc: {
-      get: function get() {
-        //concat using template literal
-        return "https://www.youtube.com/embed/";
-      }
-    },
-    myId: {
-      get: function get() {
-        //concat using template literal JSON.stringify(this.json, null, '    ');
-        return this.idVideo;
-      }
+    player: function player() {
+      return this.$refs.plyr.player;
     }
-  },
-  //components: {},
-  mounted: function mounted() {
-    this.player = this.$refs.player.player;
   },
   methods: {
-    getVideoById: function getVideoById() {
-      var _this = this;
-
-      var url = '/api/video/' + this.id;
-      axios.get(url).then(function (response) {
-        _this.videoById = response.data, _this.idVideo = response.data.key;
-      });
-    },
-    videoTimeUpdated: function videoTimeUpdated(event) {
-      this.duration = this.player.currentTime; // this if statement doesn't seem to do anything
-
-      if (this.player.currentTime > 105) {
-        this.player.stop();
-      }
-    },
-    nowPlaying: function nowPlaying(event) {
-      console.log(event);
-    },
-    playerReady: function playerReady() {
-      this.player.currentTime = 95;
-      console.log('player ready');
+    onVideoPause: function onVideoPause() {
+      console.log("Video is Paused");
     }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.video_id = this.$route.query.video_id;
+    axios.get('/api/video/' + this.id).then(function (response) {
+      _this.videoUrl = "https://www.youtube.com/embed/" + response.data.code + "?loop=false&byline=false&portrait=false&title=false&speed=true&transparent=0&gesture=media";
+      _this.videoTitle = response.data.title;
+      _this.videoVimeoId = response.data.code; //this.videoVimeoId = response.data.video_url.split("/")[4];
+
+      console.log(_this.video_id);
+    })["catch"](function (e) {
+      console.log(e);
+    });
   }
 });
 
@@ -126,37 +85,33 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "app2" } },
+    { staticStyle: { "max-height": "560px" } },
     [
-      _c("div", [_vm._v("Duration: " + _vm._s(_vm.duration))]),
-      _vm._v(" "),
       _c(
-        "vue-plyr",
+        "h1",
         {
-          ref: "player",
-          attrs: { emit: ["ready", "timeupdate", "playing"] },
-          on: {
-            timeupdate: _vm.videoTimeUpdated,
-            playing: _vm.nowPlaying,
-            ready: _vm.playerReady
-          }
+          staticClass: "title is-size-3",
+          staticStyle: { "text-align": "center" }
         },
-        [
-          _c("div", { staticClass: "plyr__poster" }, [
-            _c("iframe", {
-              attrs: {
-                id: "player",
-                src: _vm.mySrc + _vm.myId,
-                allowfullscreen: "",
-                allowtransparency: "",
-                allow: "autoplay"
-              }
-            })
-          ])
-        ]
+        [_vm._v(_vm._s(_vm.videoTitle))]
       ),
       _vm._v(" "),
-      _c("h2", { class: _vm.idVideo }, [_vm._v("@" + _vm._s(_vm.myId))])
+      _c("vue-plyr", { ref: "plyr" }, [
+        _c("div", { staticClass: "plyr__video-embed" }, [
+          _c("iframe", {
+            attrs: {
+              src: _vm.videoUrl,
+              allowfullscreen: "",
+              allowtransparency: "",
+              allow: "autoplay",
+              height: "100%",
+              width: "100%"
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "vimeoPlayer" })
     ],
     1
   )

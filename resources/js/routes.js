@@ -33,7 +33,12 @@ export default new VueRouter ({
             props: true
         },
         {
-            path: '/video/:id',
+            path: '/playlist',
+            name: 'playlist',
+            component: () => import('./views/videos/Plyr')
+        },
+        {
+            path: '/video/:id/:code',
             name: 'video',
             component: () => import('./views/videos/Plyr'),
             props: true

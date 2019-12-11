@@ -14,6 +14,9 @@
 
 
 Route::get('/', function () {
+    return view('example-vue');
+});
+Route::get('/vue', function () {
     return view('vue');
 });
 Route::get('playlist', function () {
@@ -35,4 +38,6 @@ Route::get('/usuarios', 'UserController@index')->name('users.index');
 Route::get('/users', 'UserController@list')->name('users.list');
 Route::get('/users/{id}', 'UserController@show')->name('users.show');
 
-Route::get('/{vue_capture?}', function () { return view('vue'); })->where('vue_capture', '[\/\w\.-]*');
+Route::resource('pages', 'PageController')->middleware('auth');
+
+Route::get('/{vue_capture?}', function () { return view('playlist'); })->where('vue_capture', '[\/\w\.-]*');
