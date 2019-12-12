@@ -13,7 +13,7 @@
     <form @submit.prevent="agregar" v-else>
       <h3>Agregar nota</h3>
       <input type="text" class="form-control mb-2" 
-        placeholder="Nombre de la nota" v-model="nota.nombre">
+        placeholder="Titulo da pagina" v-model="nota.nombre">
       <input type="text" class="form-control mb-2" 
         placeholder="Descripción de la nota" v-model="nota.descripcion">
       <button class="btn btn-primary" type="submit">Agregar</button>
@@ -27,7 +27,7 @@
             {{item.updated_at}}
           </span>
           <p>{{item.title}}</p>
-          <p>{{item.content}}</p>
+          <p v-html="item.content"></p>
           <p>
             <button class="btn btn-warning btn-sm" 
                 @click="editarFormulario(item)">Editar</button>

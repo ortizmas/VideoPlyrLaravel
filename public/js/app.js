@@ -38003,7 +38003,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control mb-2",
-              attrs: { type: "text", placeholder: "Nombre de la nota" },
+              attrs: { type: "text", placeholder: "Titulo da pagina" },
               domProps: { value: _vm.nota.nombre },
               on: {
                 input: function($event) {
@@ -38060,7 +38060,7 @@ var render = function() {
           _vm._v(" "),
           _c("p", [_vm._v(_vm._s(item.title))]),
           _vm._v(" "),
-          _c("p", [_vm._v(_vm._s(item.content))]),
+          _c("p", { domProps: { innerHTML: _vm._s(item.content) } }),
           _vm._v(" "),
           _c("p", [
             _c(
@@ -54218,13 +54218,13 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
     path: '/',
     name: 'home',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./views/Home */ "./resources/js/views/Home.vue"));
+      return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./views/Home */ "./resources/js/views/Home.vue"));
     }
   }, {
     path: '/usuarios',
     name: 'usuarios',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./views/Home */ "./resources/js/views/Home.vue"));
+      return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./views/Home */ "./resources/js/views/Home.vue"));
     }
   }, {
     path: '/blog',
@@ -54236,27 +54236,27 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
     path: '/users/:slug',
     name: 'users',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./views/User */ "./resources/js/views/User.vue"));
+      return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./views/User */ "./resources/js/views/User.vue"));
     },
     props: true
   }, {
     path: '/post/:slug',
     name: 'post',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./views/Post */ "./resources/js/views/Post.vue"));
+      return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./views/Post */ "./resources/js/views/Post.vue"));
     },
     props: true
   }, {
     path: '/playlist',
     name: 'playlist',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./views/videos/Plyr */ "./resources/js/views/videos/Plyr.vue"));
+      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./views/videos/Plyr */ "./resources/js/views/videos/Plyr.vue"));
     }
   }, {
     path: '/video/:id/:code',
     name: 'video',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./views/videos/Plyr */ "./resources/js/views/videos/Plyr.vue"));
+      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./views/videos/Plyr */ "./resources/js/views/videos/Plyr.vue"));
     },
     props: true
   }, {
